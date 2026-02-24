@@ -1,0 +1,7 @@
+#include <stdio.h>
+
+void funtion()
+{
+  int camelCase
+  code
+}
