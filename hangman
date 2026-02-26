@@ -1,0 +1,50 @@
+#include <stdio.h>
+#include <string.h>
+
+char words[3][50] = {"HABITAT", "ICECAPS", "RABBITS"};
+
+char* wordArray()
+{
+  int number = rand()%3;
+  
+  printf("%s\n", words[number]);
+  
+return words[number];
+}
+
+char userInput()
+{
+  char letter;
+  
+  while (letter < 'A' || letter > 'Z' ){
+    printf("Upper Case letter: ");
+    scanf(" %c", &letter);
+    
+    if  (letter < 'A' || letter > 'Z'  ){
+      printf("Invalid, try again: \n ");
+      scanf(" %*s");
+      scanf("%c", &letter);
+    }
+  }
+return letter;
+}
+
+
+
+
+int main()
+{
+  
+  char x[50];
+  strcpy(x,wordArray());
+  printf("%s", x); 
+  char y = userInput();
+  
+  if (strchr(y,x) != 0)  // 
+  {
+    printf("yes");
+  }
+  
+  
+return 0;
+}
