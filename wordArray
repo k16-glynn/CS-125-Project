@@ -1,0 +1,19 @@
+#include <stdio.h>
+
+char words[3][50] = {"HABITAT", "ICECAPS", "RABBITS"};
+
+char* wordArray()
+{
+  int number = rand()%3;
+  
+  printf("%s\n", words[number]);
+  
+  return words[number];
+}
+
+int main()
+{
+  wordArray();
+  
+  return 0;
+}
