@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 
-char words[3][50] = {"HABITAT", "ICECAPS", "RABBITS"};
+char words[3][50] = {"habitat", "icecaps", "rabbits"};
 
 char* wordArray()
 {
@@ -34,17 +34,38 @@ return letter;
 
 int main()
 {
+  int i,c;
+  char x[50] = "r a b b i t s";
+  char z[50];
+  //strcpy(x,wordArray());
+  printf("%s\n\n", x); 
+  char y ='b';
   
-  char x[50];
-  strcpy(x,wordArray());
-  printf("%s", x); 
-  char y = userInput();
-  
-  if (strchr(y,x) != 0)  // 
+  for(c=0; c < strlen(x); c+=2)
   {
-    printf("yes");
+    z[c] = '_';
+    z[c+1] = ' ';
   }
   
+  z[c] = 0;
+  
+  printf("%s", z);
+  printf("\n");
+  
+  for(i=0; i < strlen(x); i+=2)
+  {
+     if(x[i] == y)
+     {
+       printf("yes\n");
+       z[i] = y;
+     }
+     
+     else 
+       printf("no\n");
+  }
+  
+  printf("%s", z);
+  printf("\n");
   
 return 0;
 }
