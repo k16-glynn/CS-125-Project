@@ -1,31 +1,15 @@
-#include "stdio.h"
-
-
 char userInput()
 {
   char letter;
+  printf("letter: ");
+  scanf(" %c", &letter);
   
-  while (letter < 'A' || letter > 'Z' ){
-    printf("Upper Case letter: ");
+  
+  while (!isalpha(letter)){
+    printf("Invalid, try again: \n ");
     scanf(" %c", &letter);
-    
-    if  (letter < 'A' || letter > 'Z'  ){
-      printf("Invalid, try again: \n ");
-      scanf(" %*s");
-      scanf("%c", &letter);
-    }
   }
+  
+  letter = tolower(letter);
 return letter;
 }
-
-
-
-
-
-int main() 
-{
-  printf("%c", userInput());
-  return 0;
-}
-
-
