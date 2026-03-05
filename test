@@ -1,1 +1,101 @@
+#include <stdio.h>
+#include <string.h>
+
+char words[3][50] = {"h a b i t a t", "i c e c a p s", "r a b b i t s"};
+
+char* wordArray()
+{
+  int number = rand()%3;
+  
+  printf("%s\n", words[number]);
+  
+return words[number];
+}
+
+char userInput()
+{
+  char letter;
+  printf("letter: ");
+  scanf(" %c", &letter);
+  
+  
+  while (!isalpha(letter)){
+    printf("Invalid, try again: \n ");
+    scanf(" %c", &letter);
+  }
+  
+  letter = tolower(letter);
+return letter;
+}
+
+
+
+
+int main()
+{
+  srand(time(NULL));
+
+  int dashLoop, checkLoop;
+  
+  char word[50]; 
+  strcpy(word, wordArray());
+  
+  char dash[50];
+  printf("%s\n\n", word); 
+  
+  char input;
+  
+  int death;
+  
+  int deathLoop;
+  
+  for(dashLoop=0; dashLoop < strlen(word); dashLoop+=2)
+  {
+    dash[dashLoop] = '_';
+    dash[dashLoop+1] = ' ';
+  }
+  
+  dash[dashLoop] = 0;
+  
+  printf("%s", dash);
+  printf("\n");
+  
+  input = userInput();
+  
+  while( death != 5)
+  {
+    for(checkLoop=0; checkLoop < strlen(word); checkLoop+=2)
+    {
+       if(word[checkLoop] == input)
+       {
+         printf("yes\n");
+         dash[checkLoop] = input;
+         
+         
+       }
+       
+       else 
+       {
+         printf("no\n");
+       }
+    }
+    
+    for(deathLoop=0; deathLoop < strlen(word); deathLoop++)
+    {
+       if(word[deathLoop] != input)
+       {
+         printf("yes\n");
+         death++;
+         break;
+       }
+    }
+  }
+    
+    input = userInput();
+  
+  printf("%s", dash);
+  printf("\n");
+  
+return 0;
+}
 
