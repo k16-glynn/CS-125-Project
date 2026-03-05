@@ -1,8 +1,7 @@
 #include <stdio.h>
 #include <string.h>
-#include <ctype.h>
 
-char words[3][50] = {"habitat", "icecaps", "rabbits"};
+char words[3][50] = {"h a b i t a t", "i c e c a p s", "r a b b i t s"};
 
 char* wordArray()
 {
@@ -34,37 +33,58 @@ return letter;
 
 int main()
 {
-  int i,c;
-  char x[50] = "r a b b i t s";
-  char z[50];
-  //strcpy(x,wordArray());
-  printf("%s\n\n", x); 
-  char y ='b';
+  srand(time(NULL));
+
+  int dashLoop, checkLoop;
   
-  for(c=0; c < strlen(x); c+=2)
+  char word[50]; 
+  strcpy(word, wordArray());
+  
+  char dash[50];
+  printf("%s\n\n", word); 
+  
+  char input;
+  
+  int death;
+  
+  int deathLoop;
+  
+  for(dashLoop=0; dashLoop < strlen(word); dashLoop+=2)
   {
-    z[c] = '_';
-    z[c+1] = ' ';
+    dash[dashLoop] = '_';
+    dash[dashLoop+1] = ' ';
   }
   
-  z[c] = 0;
+  dash[dashLoop] = 0;
   
-  printf("%s", z);
+  printf("%s", dash);
   printf("\n");
   
-  for(i=0; i < strlen(x); i+=2)
+  input = userInput();
+  
+  while ((strncmp(dash,word, strlen(word)) != 0) || (death > 5))
   {
-     if(x[i] == y)
-     {
-       printf("yes\n");
-       z[i] = y;
-     }
-     
-     else 
-       printf("no\n");
+    for(checkLoop=0; checkLoop < strlen(word); checkLoop+=2)
+    {
+       if(word[checkLoop] == input)
+       {
+         dash[checkLoop] = input;
+         printf("%s\n", dash);
+       }
+    }
+    
+    for(deathLoop=0; deathLoop < strlen(word); deathLoop++)
+    {
+       if(word[deathLoop] != input)
+       {
+         death++;
+       }
+    }
+    if(strncmp(dash,word, strlen(word)) != 0)
+    input = userInput();
   }
   
-  printf("%s", z);
+  printf("%s", dash);
   printf("\n");
   
 return 0;
