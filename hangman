@@ -6,11 +6,13 @@ char words[3][50] = {"h a b i t a t", "i c e c a p s", "r a b b i t s"};
 char* wordArray()
 {
   int number = rand()%3;
-  
   printf("%s\n", words[number]);
   
 return words[number];
 }
+
+
+
 
 char userInput()
 {
@@ -35,51 +37,54 @@ int main()
 {
   srand(time(NULL));
 
-  int dashLoop, checkLoop;
+  int dashLoop, checkLoop, death, deathLoop, letterFound, wrongGuesses=0;
+  char word[50], dash[50], input; 
   
-  char word[50]; 
+  
+  
   strcpy(word, wordArray());
-  
-  char dash[50];
   printf("%s\n\n", word); 
   
-  char input;
-  
-  int death;
-  
-  int deathLoop;
   
   for(dashLoop=0; dashLoop < strlen(word); dashLoop+=2)
   {
     dash[dashLoop] = '_';
     dash[dashLoop+1] = ' ';
   }
+  dash[dashLoop] = 0; // removes junk in memory 
+  printf("%s\n", dash);
   
-  dash[dashLoop] = 0;
+    
   
-  printf("%s", dash);
-  printf("\n");
   
   input = userInput();
   
-  while ((strncmp(dash,word, strlen(word)) != 0) || (death > 5))
+  while (strncmp(dash,word, strlen(word)) != 0)
   {
+  
+    letterFound = 0;
+    
     for(checkLoop=0; checkLoop < strlen(word); checkLoop+=2)
     {
        if(word[checkLoop] == input)
        {
          dash[checkLoop] = input;
          printf("%s\n", dash);
+         letterFound = 1;
        }
     }
     
-    for(deathLoop=0; deathLoop < strlen(word); deathLoop++)
+    if (letterFound == 0)
     {
-       if(word[deathLoop] != input)
-       {
-         death++;
-       }
+      wrongGuesses++;
+  
+      if (wrongGuesses >= 5)
+      {
+        printf("Too many wrong guesses!\n");
+        return 0;   // exit the game
+      }
     }
+    
     if(strncmp(dash,word, strlen(word)) != 0)
     input = userInput();
   }
@@ -89,3 +94,6 @@ int main()
   
 return 0;
 }
+
+
+
