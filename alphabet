@@ -1,0 +1,22 @@
+void alphabet()
+{
+ int rows, cols;
+  
+  char alphabet[2][13] = {
+    {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M'}, 
+    {'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'}};
+  
+  
+  
+  for(rows=0;rows<2; rows++){
+    for(cols=0;cols<13; cols++){
+      if (alphabet[rows][cols] == letter){
+        printf("\033[31m%c \033[0m", alphabet[rows][cols]);
+      }
+      else {
+        printf("%c ", alphabet[rows][cols]);
+      }
+    }
+    printf("\n");
+  }
+}
