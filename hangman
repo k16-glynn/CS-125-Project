@@ -1,9 +1,21 @@
 #include <stdio.h>
 #include <string.h>
 
-char words[3][50] = {"h a b i t a t", "i c e c a p s", "r a b b i t s"};
 
-char* wordArray()
+char words[3][50] = {"H A B I T A T", "I C E C A P S", "R A B B I T S"};
+char letter, dash[50];
+
+int color[2][13] = 
+  {
+    {0,0,0,0,0,0,0,0,0,0,0,0,0},
+    {0,0,0,0,0,0,0,0,0,0,0,0,0}
+  };
+  
+int wrongGuesses=0;
+  
+  
+
+char* wordArray() // picking random word to be guessed
 {
   int number = rand()%3;
   printf("%s\n", words[number]);
@@ -16,7 +28,6 @@ return words[number];
 
 char userInput()
 {
-  char letter;
   printf("letter: ");
   scanf(" %c", &letter);
   
@@ -26,11 +37,44 @@ char userInput()
     scanf(" %c", &letter);
   }
   
-  letter = tolower(letter);
+  letter = toupper(letter);
 return letter;
 }
 
-int wrongGuesses=0;
+
+void alphabet()// Showing player guesses they've made
+{
+ int rows, cols;
+  
+  char alphabet[2][13] = 
+  {
+    {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M'}, 
+    {'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'}
+  };
+  
+  
+  
+  for(rows=0;rows<2; rows++){
+    for(cols=0;cols<13; cols++){
+      if (alphabet[rows][cols] == letter){
+        color[rows][cols]=1;
+      }
+      
+      if (color[rows][cols] == 0)
+      {
+        printf("\033[0m %c", alphabet[rows][cols]);
+      }
+      else
+      {
+        printf("\033[90m %c", alphabet[rows][cols]);
+      }
+      
+    }
+    printf("\n");
+  }
+}
+
+
 
 
 int main()
@@ -38,15 +82,16 @@ int main()
   srand(time(NULL));
 
   int dashLoop, checkLoop, death, deathLoop, letterFound;
-  char word[50], dash[50], input; 
+  char word[50], input; 
   
   
   
   strcpy(word, wordArray());
   printf("%s\n\n", word); 
   
+    hangmanFile();
   
-  for(dashLoop=0; dashLoop < strlen(word); dashLoop+=2)
+  for(dashLoop=0; dashLoop < strlen(word); dashLoop+=2) // printing dashes with length of words to be guessed
   {
     dash[dashLoop] = '_';
     dash[dashLoop+1] = ' ';
@@ -58,6 +103,7 @@ int main()
   
   
   input = userInput();
+  
   
   while (strncmp(dash,word, strlen(word)) != 0)
   {
@@ -86,13 +132,16 @@ int main()
     }
     
     hangmanFile();
+    alphabet();
     
     if(strncmp(dash,word, strlen(word)) != 0)
     input = userInput();
   }
   
-  printf("%s", dash);
-  printf("\n");
+  printf("%s\n", dash);
   
 return 0;
 }
+
+
+
