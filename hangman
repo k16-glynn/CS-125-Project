@@ -81,10 +81,24 @@ int main()
 {
   srand(time(NULL));
 
-  int dashLoop, checkLoop, death, deathLoop, letterFound;
-  char word[50], input; 
+  int dashLoop, checkLoop, death, deathLoop, letterFound, x;
+  char word[50], dash[50], row[100], input; 
   
+  FILE* HangmanRules = fopen("HangmanRules.txt", "r");
   
+  for(x=1; x<=10; x++)
+  {
+    fgets(row,100,HangmanRules);
+    printf("%s", row);
+  }
+  
+  sleep(2);
+  
+  for(x=11; x<=30; x++)
+  {
+    fgets(row,100,HangmanRules);
+    printf("%s", row);
+  }
   
   strcpy(word, wordArray());
   printf("%s\n\n", word); 
@@ -142,6 +156,3 @@ int main()
   
 return 0;
 }
-
-
-
