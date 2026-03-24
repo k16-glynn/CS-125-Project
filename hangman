@@ -30,14 +30,14 @@ char userInput()
 return letter;
 }
 
-
+int wrongGuesses=0;
 
 
 int main()
 {
   srand(time(NULL));
 
-  int dashLoop, checkLoop, death, deathLoop, letterFound, wrongGuesses=0;
+  int dashLoop, checkLoop, death, deathLoop, letterFound;
   char word[50], dash[50], input; 
   
   
@@ -78,12 +78,14 @@ int main()
     {
       wrongGuesses++;
   
-      if (wrongGuesses >= 5)
+      if (wrongGuesses >= 7)
       {
         printf("Too many wrong guesses!\n");
         return 0;   // exit the game
       }
     }
+    
+    hangmanFile();
     
     if(strncmp(dash,word, strlen(word)) != 0)
     input = userInput();
@@ -94,6 +96,3 @@ int main()
   
 return 0;
 }
-
-
-
