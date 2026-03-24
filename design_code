@@ -1,8 +1,9 @@
 #include <stdio.h>
 #include <string.h>
 
+extern int wrongGuesses;
 
-void hangmanFile(int wrongGuesses)
+void hangmanFile()
 {
   FILE*hangman = fopen("hangman.txt","r");
 
@@ -20,50 +21,56 @@ void hangmanFile(int wrongGuesses)
     break;
   
   case(1):
-    for(i = 10; i<18; i++)
+    for(i = 1; i<19; i++)
     {
       fgets(line,100,hangman);
-      printf("%s",line);
+      if(i>=11)
+        printf("%s",line);
     }
     break;
     
   case(2):
-    for(i = 19; i<27; i++)
+    for(i = 1; i<29; i++)
     {
       fgets(line,100,hangman);
-      printf("%s",line);
+      if(i>=21)
+        printf("%s",line);
     }
     break;
     
   case(3):
-    for(i = 27; i<35; i++)
+    for(i = 1; i<38; i++)
     {
       fgets(line,100,hangman);
-      printf("%s",line);
+      if(i>=30)
+        printf("%s",line);
     }
     break;
     
   case(4):
-    for(i = 36; i<44; i++)
+    for(i = 1; i<48; i++)
     {
       fgets(line,100,hangman);
-      printf("%s",line);
+      if(i>=40)
+        printf("%s",line);
     }
     break;
     
   case(5):
-    for(i = 44; i<52; i++)
+    for(i = 1; i<57; i++)
     {
       fgets(line,100,hangman);
-      printf("%s",line);
+      if(i>=49)
+        printf("%s",line);
     }
     break;
     
   case(6):
-    for(i = 52; i<60; i++)
+    for(i = 1; i<67; i++)
     {
       fgets(line,100,hangman);
-      printf("%s",line);
+      if(i>=58)
+        printf("%s",line);
     }
     break;
   }
@@ -71,11 +78,3 @@ void hangmanFile(int wrongGuesses)
   fclose(hangman);
 }
 
-int main()
-{
-
- int wrongGuesses = 0;
- hangmanFile(wrongGuesses);
- 
- return 0;
-}
