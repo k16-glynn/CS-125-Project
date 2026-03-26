@@ -1,9 +1,13 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
+#include <ctype.h>
+#include <time.h>
+#include <unistd.h>
 
-
-char words[3][50] = {"H A B I T A T", "I C E C A P S", "R A B B I T S"};
-char letter, dash[50];
+//char words[n][50] = {"H A B I T A T", "I C E C A P S", "R A B B I T S", };
+char letter, dash[50], entry[100];;
+void hangmanFile();
 
 int color[2][13] = 
   {
@@ -17,10 +21,23 @@ int wrongGuesses=0;
 
 char* wordArray() // picking random word to be guessed
 {
-  int number = rand()%3;
-  printf("%s\n", words[number]);
+  FILE * words = fopen("words.txt", "r");
+  int i,number;
   
-return words[number];
+  number = rand()%10+1;
+  
+  for(i = 1; i<10; i++)
+    {
+      fgets(entry,100,words);
+      if(i == number)
+      {
+        entry[13]=0;
+        entry[14]=0;
+        printf("%s************************\n",entry);
+        break;  
+      }
+    }
+return entry;
 }
 
 
@@ -101,7 +118,7 @@ int main()
   }
   
   strcpy(word, wordArray());
-  printf("%s\n\n", word); 
+  //printf("%s\n\n", word); 
   
     hangmanFile();
   
