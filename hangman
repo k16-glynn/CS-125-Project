@@ -4,10 +4,11 @@
 #include <ctype.h>
 #include <time.h>
 #include <unistd.h>
+#include "clearScreen.h"
 
-//char words[n][50] = {"H A B I T A T", "I C E C A P S", "R A B B I T S", };
-char letter, dash[50], entry[100];;
-void hangmanFile();
+
+char words[3][50] = {"H A B I T A T", "I C E C A P S", "R A B B I T S"};
+char letter, dash[50], entry[100];
 
 int color[2][13] = 
   {
@@ -41,8 +42,6 @@ return entry;
 }
 
 
-
-
 char userInput()
 {
   printf("letter: ");
@@ -70,7 +69,6 @@ void alphabet()// Showing player guesses they've made
   };
   
   
-  
   for(rows=0;rows<2; rows++){
     for(cols=0;cols<13; cols++){
       if (alphabet[rows][cols] == letter){
@@ -87,20 +85,17 @@ void alphabet()// Showing player guesses they've made
       }
       
     }
-    printf("\n");
+    
+    printf(" |\n");
   }
+  
 }
 
 
+void hangmanRules(){
+  int x;
+  char row[100];
 
-
-int main()
-{
-  srand(time(NULL));
-
-  int dashLoop, checkLoop, death, deathLoop, letterFound, x;
-  char word[50], dash[50], row[100], input; 
-  
   FILE* HangmanRules = fopen("HangmanRules.txt", "r");
   
   for(x=1; x<=10; x++)
@@ -109,18 +104,47 @@ int main()
     printf("%s", row);
   }
   
-  sleep(2);
+  sleep(1);
   
   for(x=11; x<=30; x++)
   {
     fgets(row,100,HangmanRules);
     printf("%s", row);
   }
+}
+
+void hangmanRules1(){
+  int x;
+  char row[100];
+
+  FILE* HangmanRules = fopen("HangmanRules.txt", "r");
+  
+  for(x=1; x<=10; x++)
+  {
+    fgets(row,100,HangmanRules);
+    printf("%s", row);
+  }
+  
+
+}
+
+
+
+int main()
+{
+  srand(time(NULL));
+
+  int dashLoop, checkLoop, death, deathLoop, letterFound;
+  char word[50], dash[50], input; 
+  
+  
   
   strcpy(word, wordArray());
   //printf("%s\n\n", word); 
   
-    hangmanFile();
+  
+  hangmanRules();
+  
   
   for(dashLoop=0; dashLoop < strlen(word); dashLoop+=2) // printing dashes with length of words to be guessed
   {
@@ -128,7 +152,7 @@ int main()
     dash[dashLoop+1] = ' ';
   }
   dash[dashLoop] = 0; // removes junk in memory 
-  printf("%s\n", dash);
+  //printf("%s\n", dash);
   
     
   
@@ -146,7 +170,6 @@ int main()
        if(word[checkLoop] == input)
        {
          dash[checkLoop] = input;
-         printf("%s\n", dash);
          letterFound = 1;
        }
     }
@@ -162,11 +185,15 @@ int main()
       }
     }
     
+    hangmanRules1();
     hangmanFile();
+    printf("\n%s\n", dash);
     alphabet();
+    
     
     if(strncmp(dash,word, strlen(word)) != 0)
     input = userInput();
+    //clearScreen();
   }
   
   printf("%s\n", dash);
