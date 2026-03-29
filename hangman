@@ -4,7 +4,6 @@
 #include <ctype.h>
 #include <time.h>
 #include <unistd.h>
-#include "clearScreen.h"
 
 
 char words[3][50] = {"H A B I T A T", "I C E C A P S", "R A B B I T S"};
@@ -44,7 +43,7 @@ return entry;
 
 char userInput()
 {
-  printf("letter: ");
+  printf("                          Guess a letter: ");
   scanf(" %c", &letter);
   
   
@@ -89,6 +88,11 @@ void alphabet()// Showing player guesses they've made
     printf(" |\n");
   }
   
+}
+
+void clearScreen(){
+  sleep(1);
+  printf("\e[2J\e[H");
 }
 
 
@@ -158,7 +162,7 @@ int main()
   
   
   input = userInput();
-  
+  clearScreen();
   
   while (strncmp(dash,word, strlen(word)) != 0)
   {
@@ -187,13 +191,13 @@ int main()
     
     hangmanRules1();
     hangmanFile();
-    printf("\n%s\n", dash);
+    printf("                        \n%s\n", dash);
     alphabet();
     
     
     if(strncmp(dash,word, strlen(word)) != 0)
     input = userInput();
-    //clearScreen();
+    clearScreen();
   }
   
   printf("%s\n", dash);
