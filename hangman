@@ -26,14 +26,13 @@ char* wordArray() // picking random word to be guessed
   
   number = rand()%10+1;
   
-  for(i = 1; i<10; i++)
+  for(i = 1; i<30; i++)
     {
       fgets(entry,100,words);
       if(i == number)
       {
         entry[13]=0;
         entry[14]=0;
-        printf("%s************************\n",entry);
         break;  
       }
     }
