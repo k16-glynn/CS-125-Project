@@ -36,7 +36,7 @@ char* wordArray() // picking random word to be guessed
         break;  
       }
     }
-return entry;
+  return entry;
 }
 
 
@@ -46,19 +46,20 @@ char userInput()
   scanf(" %c", &letter);
   
   
-  while (!isalpha(letter)){
+  while (!isalpha(letter))
+  {
     printf("Invalid, try again: \n ");
     scanf(" %c", &letter);
   }
   
   letter = toupper(letter);
-return letter;
+  return letter;
 }
 
 
 void alphabet()// Showing player guesses they've made
 {
- int rows, cols;
+  int rows, cols;
   
   char alphabet[2][13] = 
   {
@@ -67,9 +68,12 @@ void alphabet()// Showing player guesses they've made
   };
   
   
-  for(rows=0;rows<2; rows++){
-    for(cols=0;cols<13; cols++){
-      if (alphabet[rows][cols] == letter){
+  for(rows=0;rows<2; rows++)
+  {
+    for(cols=0;cols<13; cols++)
+    {
+      if (alphabet[rows][cols] == letter)
+      {
         color[rows][cols]=1;
       }
       
@@ -89,13 +93,15 @@ void alphabet()// Showing player guesses they've made
   
 }
 
-void clearScreen(){
+void clearScreen()
+{
   sleep(1);
   printf("\e[2J\e[H");
 }
 
 
-void hangmanRules(){
+void hangmanRules()
+{
   int x;
   char row[100];
 
@@ -116,7 +122,8 @@ void hangmanRules(){
   }
 }
 
-void hangmanRules1(){
+void hangmanRules1()
+{
   int x;
   char row[100];
 
@@ -170,11 +177,11 @@ int main()
     
     for(checkLoop=0; checkLoop < strlen(word); checkLoop+=2)
     {
-       if(word[checkLoop] == input)
-       {
-         dash[checkLoop] = input;
-         letterFound = 1;
-       }
+      if(word[checkLoop] == input)
+      {
+        dash[checkLoop] = input;
+        letterFound = 1;
+      }
     }
     
     if (letterFound == 0)
@@ -201,5 +208,5 @@ int main()
   
   printf("%s\n", dash);
   
-return 0;
+  return 0;
 }
