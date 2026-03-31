@@ -1,7 +1,43 @@
-#include <stdio.h>
+Example code 1)
+#include <stdio.h>  \\ includes at the beginning of the code
 
-void funtion()
+void funtion()      \\ All functions should follow this basline format
+{                   \\ Functions should be called and defined before main
+  int camelCase     \\ All variable names will be in camelCase if it is greater than one word
+  code
+                  
+  return 0;
+}
+
+while()     \\ This is the same for all loop fucntion (for, while, etc) and if/else statements
 {
-  int camelCase
   code
 }
+
+** In ALL parts of the code outside of any loops should line up
+   the loops should line up
+   the code in all loops should line up
+
+Example Code 2)
+int main()
+{
+  code out of loop
+
+    while()
+    {
+      code in loop
+    }
+
+  code out of loop
+
+    if()
+    {
+      code in loop
+    }
+
+  reutrn 0;
+}
+
+   
+   
+
