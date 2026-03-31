@@ -3,7 +3,7 @@ Example code 1)
 
 void funtion()      \\ All functions should follow this basline format
 {                   \\ Functions should be called and defined before main
-  int camelCase     \\ All variable names will be in camelCase if it is greater than one word
+  int camelCase     \\ All variable names will be in camelCase if it is greater than one word; one word variables are lower case
   code
                   
   return 0;
