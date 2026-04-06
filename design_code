@@ -1,3 +1,5 @@
+//Luca Careaga & Glynn Kiprono
+
 #include <stdio.h>
 #include <string.h>
 #include "example.h"
