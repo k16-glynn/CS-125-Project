@@ -1,39 +1,40 @@
 
 
 
-  ██╗  ██╗ █████╗ ███╗   ██╗ ██████╗ ███╗   ███╗ █████╗ ███╗   ██╗
-  ██║  ██║██╔══██╗████╗  ██║██╔════╝ ████╗ ████║██╔══██╗████╗  ██║
-  ███████║███████║██╔██╗ ██║██║  ███╗██╔████╔██║███████║██╔██╗ ██║
-  ██╔══██║██╔══██║██║╚██╗██║██║   ██║██║╚██╔╝██║██╔══██║██║╚██╗██║
-  ██║  ██║██║  ██║██║ ╚████║╚██████╔╝██║ ╚═╝ ██║██║  ██║██║ ╚████║
-  ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝ ╚═════╝ ╚═╝     ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝
+  __    __       ___      .__   __.   _______ .___  ___.      ___      .__   __. 
+|  |  |  |     /   \     |  \ |  |  /  _____||   \/   |     /   \     |  \ |  | 
+|  |__|  |    /  ^  \    |   \|  | |  |  __  |  \  /  |    /  ^  \    |   \|  | 
+|   __   |   /  /_\  \   |  . `  | |  | |_ | |  |\/|  |   /  /_\  \   |  . `  | 
+|  |  |  |  /  _____  \  |  |\   | |  |__| | |  |  |  |  /  _____  \  |  |\   | 
+|__|  |__| /__/     \__\ |__| \__|  \______| |__|  |__| /__/     \__\ |__| \__| 
+                                                                                
                                                                 
- ------------------------------------------------------------------
-
-       _   _                 _         ______ _             
-      | | | |               | |        | ___ \ |            
-      | |_| | _____      __ | |_ ___   | |_/ / | __ _ _   _ 
-      |  _  |/ _ \ \ /\ / / | __/ _ \  |  __/| |/ _` | | | |
-      | | | | (_) \ V  V /  | || (_) | | |   | | (_| | |_| |
-      \_| |_/\___/ \_/\_/    \__\___/  \_|   |_|\__,_|\__, |
-                                                       __/ |
-                                                      |___/ 
-       
-        - Choose a letter that you think is in the mystery word
-        
-        - If the letter is right the gane will continue 
-          until the word is guessed
-        
-        - If the letter is wrong the "Hangman" will grow by one
-          body part each until he is whole. He has 7 body parts.
-          
-        - Two hints are provided automatically: one after the third 
-          incorrect guess, and a second after the sixth incorrect 
-          guess only if at least two letters remain unrevealed.
-          
-        - Once the "Hangman" is whole the game is over
-        
-        - NOTE: It is nature themed and some words are not simple
-        
-  
-                        
+     ------------------------------------------------------------------
+    
+           _   _                 _         ______ _             
+          | | | |               | |        | ___ \ |            
+          | |_| | _____      __ | |_ ___   | |_/ / | __ _ _   _ 
+          |  _  |/ _ \ \ /\ / / | __/ _ \  |  __/| |/ _` | | | |
+          | | | | (_) \ V  V /  | || (_) | | |   | | (_| | |_| |
+          \_| |_/\___/ \_/\_/    \__\___/  \_|   |_|\__,_|\__, |
+                                                           __/ |
+                                                          |___/ 
+           
+            - Choose a letter that you think is in the mystery word
+            
+            - If the letter is right the gane will continue 
+              until the word is guessed
+            
+            - If the letter is wrong the "Hangman" will grow by one
+              body part each until he is whole. He has 7 body parts.
+              
+            - Two hints are provided automatically: one after the third 
+              incorrect guess, and a second after the sixth incorrect 
+              guess only if at least two letters remain unrevealed.
+              
+            - Once the "Hangman" is whole the game is over
+            
+            - NOTE: It is nature themed and some words are not simple
+            
+      
+                            
