@@ -4,6 +4,7 @@
 #include <ctype.h>
 #include <time.h>
 #include <unistd.h>
+#include "example.h"
 
 #define RESET   "\033[0m"
 #define GREEN   "\033[92m"
@@ -23,6 +24,7 @@ int color[2][13] =
 };
 
 int wrongGuesses = 0;
+
 
 char* wordArray() // picking random word to be guessed
 {
@@ -291,6 +293,7 @@ int main()
           hangmanRules1();
           printf(RED "\n\n                 Game Over!! Too many wrong guesses!!!\n" RESET);
           printf(YELLOW "                       The word was %s\n\n\n" RESET, right);
+          example();
           return 0;
         }
       }
@@ -344,6 +347,8 @@ int main()
   hangmanRules1();
   printf(GREEN "\n\n                        Nice work !!!!!!!\n" RESET);
   printf(CYAN "  You guessed the word (%s) before the hangman was completed\n\n\n" RESET, right);
+  
+  example(); //from header
 
   return 0;
 }
