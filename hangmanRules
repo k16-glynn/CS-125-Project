@@ -1,5 +1,6 @@
 
 
+
   ██╗  ██╗ █████╗ ███╗   ██╗ ██████╗ ███╗   ███╗ █████╗ ███╗   ██╗
   ██║  ██║██╔══██╗████╗  ██║██╔════╝ ████╗ ████║██╔══██╗████╗  ██║
   ███████║███████║██╔██╗ ██║██║  ███╗██╔████╔██║███████║██╔██╗ ██║
@@ -26,7 +27,13 @@
         - If the letter is wrong the "Hangman" will grow by one
           body part each until he is whole. He has 7 body parts.
           
+        - Two hints are provided automatically: one after the third 
+          incorrect guess, and a second after the sixth incorrect 
+          guess only if at least two letters remain unrevealed.
+          
         - Once the "Hangman" is whole the game is over
+        
+        - NOTE: It is nature themed and some words are not simple
         
   
                         
