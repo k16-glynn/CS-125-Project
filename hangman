@@ -5,100 +5,123 @@
 #include <time.h>
 #include <unistd.h>
 
+#define RESET   "\033[0m"
+#define GREEN   "\033[92m"
+#define RED     "\033[91m"
+#define YELLOW  "\033[93m"
+#define CYAN    "\033[96m"
+#define BLUE    "\033[94m"
+#define GRAY    "\033[90m"
+#define WHITE   "\033[97m"
 
-char words[3][50] = {"H A B I T A T", "I C E C A P S", "R A B B I T S"};
 char letter, dash[50], entry[100];
 
 int color[2][13] = 
-  {
-    {0,0,0,0,0,0,0,0,0,0,0,0,0},
-    {0,0,0,0,0,0,0,0,0,0,0,0,0}
-  };
-  
-int wrongGuesses=0;
-  
-  
+{
+  {0,0,0,0,0,0,0,0,0,0,0,0,0},
+  {0,0,0,0,0,0,0,0,0,0,0,0,0}
+};
+
+int wrongGuesses = 0;
 
 char* wordArray() // picking random word to be guessed
 {
-  FILE * words = fopen("words.txt", "r");
-  int i,number;
-  
-  number = rand()%10+1;
-  
-  for(i = 1; i<30; i++)
+  FILE *words = fopen("words.txt", "r");
+  int i, number;
+
+  number = rand()%30 + 1;
+
+  for(i = 1; i < 30; i++)
+  {
+    fgets(entry, 100, words);
+    if(i == number)
     {
-      fgets(entry,100,words);
-      if(i == number)
-      {
-        entry[13]=0;
-        entry[14]=0;
-        break;  
-      }
+      entry[13] = 0;
+      entry[14] = 0;
+      break;  
     }
+  }
+
+  fclose(words);
   return entry;
 }
 
 
+
 char userInput()
 {
-  printf("                          Guess a letter: ");
+  char extra; 
+
+  printf("\n                         Guess a letter: ");
   scanf(" %c", &letter);
-  
-  
+
+  if (scanf("%c", &extra) == 1 && extra != '\n')
+  {
+    while (getchar() != '\n');   // clear input
+    printf("                Invalid, Enter exactly one letter only.\n");
+    return userInput();
+  }
+
   while (!isalpha(letter))
   {
-    printf("Invalid, try again: \n ");
+    printf("                      Invalid, try again: ");
     scanf(" %c", &letter);
+
+    if (scanf("%c", &extra) == 1 && extra != '\n')
+    {
+      while (getchar() != '\n');
+      printf("                Enter exactly one letter only.\n");
+      return userInput();
+    }
   }
-  
+
   letter = toupper(letter);
   return letter;
 }
 
 
-void alphabet()// Showing player guesses they've made
+
+
+void alphabet() // Showing player guesses they've made
 {
   int rows, cols;
-  
+
   char alphabet[2][13] = 
   {
     {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M'}, 
     {'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'}
   };
-  
-  
-  for(rows=0;rows<2; rows++)
-  {
-    for(cols=0;cols<13; cols++)
+
+  for(rows = 0; rows < 2; rows++)
+  {  
+    printf("                    ");
+
+    for(cols = 0; cols < 13; cols++)
     {
       if (alphabet[rows][cols] == letter)
       {
-        color[rows][cols]=1;
+        color[rows][cols] = 1;
       }
-      
+
       if (color[rows][cols] == 0)
       {
-        printf("\033[0m %c", alphabet[rows][cols]);
+        printf(WHITE " %c" RESET, alphabet[rows][cols]);
       }
       else
       {
-        printf("\033[90m %c", alphabet[rows][cols]);
+        printf(GRAY " %c" RESET, alphabet[rows][cols]);
       }
-      
     }
-    
-    printf(" |\n");
+
+    printf("\n");
   }
-  
 }
 
 void clearScreen()
 {
-  sleep(1);
+  usleep(200000);
   printf("\e[2J\e[H");
 }
-
 
 void hangmanRules()
 {
@@ -106,20 +129,22 @@ void hangmanRules()
   char row[100];
 
   FILE* HangmanRules = fopen("HangmanRules.txt", "r");
-  
-  for(x=1; x<=10; x++)
+
+  for(x = 1; x <= 10; x++)
   {
-    fgets(row,100,HangmanRules);
+    fgets(row, 100, HangmanRules);
     printf("%s", row);
   }
-  
-  sleep(1);
-  
-  for(x=11; x<=30; x++)
+
+  usleep(200000);
+
+  for(x = 11; x <= 36; x++)
   {
-    fgets(row,100,HangmanRules);
+    fgets(row, 100, HangmanRules);
     printf("%s", row);
   }
+
+  fclose(HangmanRules);
 }
 
 void hangmanRules1()
@@ -128,85 +153,197 @@ void hangmanRules1()
   char row[100];
 
   FILE* HangmanRules = fopen("HangmanRules.txt", "r");
-  
-  for(x=1; x<=10; x++)
+
+  for(x = 1; x <= 10; x++)
   {
-    fgets(row,100,HangmanRules);
+    fgets(row, 100, HangmanRules);
     printf("%s", row);
   }
-  
 
+  fclose(HangmanRules);
 }
 
+char giveHint(char word[], char dash[]) // gives player hint
+{
+  int i;
+
+  for(i = 0; i < strlen(word); i += 2)
+  {
+    if(dash[i] == '_')
+    {
+      dash[i] = word[i];
+      return word[i];
+    }
+  }
+
+  return 0;
+}
+
+int countHidden(char dash[], char word[]) // counts hidden letters
+{
+  int i, count = 0;
+
+  for(i = 0; i < strlen(word); i += 2)
+  {
+    if(dash[i] == '_')
+      count++;
+  }
+
+  return count;
+}
 
 
 int main()
 {
   srand(time(NULL));
 
-  int dashLoop, checkLoop, death, deathLoop, letterFound;
-  char word[50], dash[50], input; 
-  
-  
-  
+  int dashLoop, checkLoop, letterFound, p, q = 0;
+  int hint1Used = 0, hint2Used = 0;
+  int alreadyGuessed, guessedIndex = 0;
+
+  char word[50], right[50], dash[50], input, hintLetter = 0;
+  char message[100];
+  char guessed[60];
+
   strcpy(word, wordArray());
-  //printf("%s\n\n", word); 
-  
-  
+
+  for(p = 0; p < strlen(word); p++)
+  {
+    if (word[p] != ' ')
+    {
+      right[q++] = word[p];
+    }
+  }
+  right[q] = '\0';
+
   hangmanRules();
-  
-  
-  for(dashLoop=0; dashLoop < strlen(word); dashLoop+=2) // printing dashes with length of words to be guessed
+
+  for(dashLoop = 0; dashLoop < strlen(word); dashLoop += 2)
   {
     dash[dashLoop] = '_';
-    dash[dashLoop+1] = ' ';
+    dash[dashLoop + 1] = ' ';
   }
-  dash[dashLoop] = 0; // removes junk in memory 
-  //printf("%s\n", dash);
-  
-    
-  
-  
+  dash[dashLoop] = 0;
+
   input = userInput();
   clearScreen();
-  
-  while (strncmp(dash,word, strlen(word)) != 0)
+
+  while (strncmp(dash, word, strlen(word)) != 0)
   {
-  
-    letterFound = 0;
-    
-    for(checkLoop=0; checkLoop < strlen(word); checkLoop+=2)
+    hintLetter = 0;
+    alreadyGuessed = 0;
+
+    if (input >= 'A' && input <= 'M')// check if letter has already been guessed
     {
-      if(word[checkLoop] == input)
+      if (color[0][input - 'A'] == 1)
+        alreadyGuessed = 1;
+    }
+    else if (input >= 'N' && input <= 'Z')
+    {
+      if (color[1][input - 'N'] == 1)
+        alreadyGuessed = 1;
+    }
+
+    if (alreadyGuessed == 1)
+    {
+      strcpy(message, "You already guessed that letter.");
+    }
+    else
+    {
+      guessed[guessedIndex++] = input; //display already guessed letters
+      guessed[guessedIndex++] = ' ';
+      guessed[guessedIndex] = '\0';
+
+      letterFound = 0;
+
+      for(checkLoop = 0; checkLoop < strlen(word); checkLoop += 2)
       {
-        dash[checkLoop] = input;
-        letterFound = 1;
+        if(word[checkLoop] == input)
+        {
+          dash[checkLoop] = input;
+          letterFound = 1;
+        }
+      }
+
+      if (letterFound == 1)
+      {
+        strcpy(message, "Correct guess!");
+      }
+      else
+      {
+        wrongGuesses++;
+        strcpy(message, "Wrong guess.");
+
+        if (wrongGuesses == 3 && hint1Used == 0)
+        {
+          hintLetter = giveHint(word, dash);
+          hint1Used = 1;
+        }
+
+        if (wrongGuesses == 6 && hint2Used == 0 && countHidden(dash, word) >= 2)
+        {
+          hintLetter = giveHint(word, dash);
+          hint2Used = 1;
+        }
+
+        if (wrongGuesses >= 7)
+        {
+          hangmanRules1();
+          printf(RED "\n\n                 Game Over!! Too many wrong guesses!!!\n" RESET);
+          printf(YELLOW "                       The word was %s\n\n\n" RESET, right);
+          return 0;
+        }
       }
     }
-    
-    if (letterFound == 0)
-    {
-      wrongGuesses++;
-  
-      if (wrongGuesses >= 7)
-      {
-        printf("Too many wrong guesses!\n");
-        return 0;   // exit the game
-      }
-    }
-    
+
     hangmanRules1();
     hangmanFile();
-    printf("                        \n%s\n", dash);
+
+    printf("\n");
+    printf("                        " BLUE "[ %s ]" RESET "\n\n", dash);
+
     alphabet();
+
+    printf("\n                    " CYAN "Guessed letters:" RESET " %s\n", guessed);
+
+  
+
+    if(strncmp(dash, word, strlen(word)) != 0)
+    {
+      if (wrongGuesses == 0)
+        printf("\n                        " WHITE "Wrong guesses %d/7" RESET "\n", wrongGuesses);
+      else 
+        printf("\n                        " RED "Wrong guesses %d/7" RESET "\n", wrongGuesses);
+
+      if (wrongGuesses == 5)
+      {
+        printf("\n                  " RED "Warning: only 2 guesses remain." RESET "\n");
+      }
+      else if (wrongGuesses == 6)
+      {
+        printf("\n                  " RED "Final warning: only 1 guess remains." RESET "\n");
+      }
+    }
     
+    if (strcmp(message, "Correct guess!") == 0)
+      printf("\n                          " GREEN "%s" RESET "\n", message);
+    else if (strcmp(message, "Wrong guess.") == 0)
+      printf("\n                          " RED "%s" RESET "\n", message);
+    else
+      printf("\n                    " YELLOW "%s" RESET "\n", message);
+
+    if (hintLetter != 0)
+    {
+      printf("\n                  " YELLOW "Hint given! Letter revealed: %c" RESET "\n", hintLetter);
+    }
     
-    if(strncmp(dash,word, strlen(word)) != 0)
     input = userInput();
     clearScreen();
   }
-  
-  printf("%s\n", dash);
-  
+
+  hangmanRules1();
+  printf(GREEN "\n\n                        Nice work !!!!!!!\n" RESET);
+  printf(CYAN "  You guessed the word (%s) before the hangman was completed\n\n\n" RESET, right);
+
   return 0;
 }
